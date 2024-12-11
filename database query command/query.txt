@@ -1,0 +1,98 @@
+CREATE TABLE t_expense (
+    exid bigint NOT NULL,
+    ex_type character varying(255),
+    ex_date timestamp(6) with time zone,
+    uid bigint,
+    expense integer
+);
+
+CREATE TABLE t_income (
+    icid bigint NOT NULL,
+    ic_type character varying(255),
+    income integer,
+    ic_date timestamp(6) with time zone,
+    uid bigint
+);
+
+CREATE TABLE t_token (
+    tid bigint NOT NULL,
+    token_type character varying(255),
+    token character varying(255),
+    create_date timestamp(6) with time zone,
+    end_date timestamp(6) with time zone,
+    uid bigint
+);
+
+CREATE TABLE t_user (
+    uid bigint NOT NULL,
+    gmail character varying(255),
+    username character varying(255),
+    lname character varying(255),
+    fname character varying(255),
+    password character varying(255),
+    create_date timestamp(6) with time zone,
+    last_login timestamp(6) with time zone,
+    is_verified boolean,
+    is_banned boolean
+);
+
+ALTER TABLE t_expense ALTER COLUMN exid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME t_expense_exid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+ALTER TABLE ONLY t_expense
+    ADD CONSTRAINT t_expense_pkey PRIMARY KEY (exid);
+    
+    
+ALTER TABLE t_user ALTER COLUMN uid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME t_user_uid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+ALTER TABLE ONLY t_user
+    ADD CONSTRAINT t_user_pkey PRIMARY KEY (uid);
+
+
+ALTER TABLE t_income ALTER COLUMN icid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME t_income_icid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+ALTER TABLE ONLY t_income
+    ADD CONSTRAINT t_income_pkey PRIMARY KEY (icid);
+
+ALTER TABLE t_token ALTER COLUMN tid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME t_token_tid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+ALTER TABLE ONLY t_token
+    ADD CONSTRAINT t_token_pkey PRIMARY KEY (tid);
+
+
+
+ALTER TABLE ONLY t_expense
+    ADD CONSTRAINT "user id F key" FOREIGN KEY (uid) REFERENCES t_user(uid);
+
+ALTER TABLE ONLY t_income
+    ADD CONSTRAINT "user id" FOREIGN KEY (uid) REFERENCES t_user(uid);
+
+ALTER TABLE ONLY t_token
+    ADD CONSTRAINT "user id" FOREIGN KEY (uid) REFERENCES t_user(uid) NOT VALID;
+
