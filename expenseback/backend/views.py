@@ -600,8 +600,8 @@ def dt_income(request):
 
     try:
         uid = jsons['uid']
-        income = jsons['income']
-        incometype = jsons['incometype']
+        income = jsons['amount']
+        incometype = jsons['description']
 
     except KeyError as e:
         action = jsons.get('action')
@@ -716,8 +716,8 @@ def expense(request):
     try:
         # Extract required fields
         uid = jsons['uid']
-        expensez = jsons['expense']
-        expensetype = jsons['expensetype']
+        expensez = jsons['amount']
+        expensetype = jsons['description']
 
         # Connect to the database
         myConn = connectDB()
@@ -820,10 +820,13 @@ def totala(request):
         myConn = connectDB() # database holbolt uusgej baina
         cursor = myConn.cursor() # cursor uusgej baina
         query = f"""
-        SELECT SUM(t.expense + COALESCE(i.income, 0)) AS sun
-        FROM t_expense AS t
-        INNER JOIN t_income AS i USING (uid)
-        WHERE t.uid = '{uid}'
+        SELECT (t.total_expense + i.total_income) AS total
+        FROM (SELECT uid, SUM(expense) AS total_expense FROM t_expense WHERE uid = {uid}
+        GROUP BY uid) AS t
+        JOIN (SELECT uid, SUM(income) AS total_income FROM t_income WHERE uid = {uid}
+        GROUP BY uid) AS i
+        ON t.uid = i.uid;
+
         """
         cursor.execute(query)
         myConn.commit()
