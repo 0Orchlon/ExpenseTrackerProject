@@ -101,6 +101,14 @@ export default function Dashboard() {
     localStorage.removeItem("token");
     router.push("/login");
   };
+  
+const toIncome = () => {
+  router.push("/income")
+}  
+
+const toExpense = () => {
+  router.push("/expense")
+}
 
   const handleSubmit = async () => {
     if (amount <= 0 || !description) {
@@ -183,6 +191,17 @@ export default function Dashboard() {
           </div>
         </div>
 
+    <div className="flex justify-normal">
+      <div className="py-5 px-5 flex justify-normal shadow-md rounded-md mt-6 p-6">
+      <button onClick={toIncome} 
+          className="bg-green-900 text-white px-6  py-2 rounded-md hover:bg-indigo-700 transition">
+        Incomes</button>
+      <p className=" px-6 py-2 rounded-md"></p>
+      <button onClick={toExpense}
+       className="bg-red-900 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">
+        Expenses</button>
+      </div>
+    </div>
         <div className="mt-6 bg-gray-50 p-6 rounded-md shadow-md text-black">
           <h3 className="text-xl font-semibold text-gray-700 mb-4">Add New Entry</h3>
           <div className="flex flex-col space-y-4">

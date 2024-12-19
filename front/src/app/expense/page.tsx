@@ -19,10 +19,10 @@ interface Entry {
   description: string;
 }
 
-export default function Incomes() {
+export default function Expenses() {
   const [user, setUser] = useState<User | null>(null);
   const [history, setHistory] = useState<Entry[]>([]);
-  const [incomesum, setIncomeSum] = useState<number>(0);
+  const [expensesum, setEXpenseSmum] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,26 +51,26 @@ export default function Incomes() {
       setLoading(true);
 
       const historyData = await sendRequest("http://localhost:8000/user/", "POST", {
-        action: "allincome",
+        action: "allexpense",
         uid: userId,
       });
 
-      const incomeSumData = await sendRequest("http://localhost:8000/user/", "POST", {
-        action: "incomesum",
+      const expensesumData = await sendRequest("http://localhost:8000/user/", "POST", {
+        action: "expensesum",
         uid: userId,
       });
 
       // Map and set the fetched data
-      const totalIncome = incomeSumData?.data?.[0]?.totalIncome ?? 0; // Default to 0 if value is not present
-    setIncomeSum(totalIncome);
+      const totalExpense = expensesumData?.data?.[0]?.totalExpense ?? 0; // Default to 0 if value is not present
+      setEXpenseSmum(totalExpense);
 
       
       
       const formattedHistory = historyData.data.map((entry: any, index: number) => ({
         id: index,
-        amount: entry.income,
-        date: new Date(entry.ic_date).toLocaleString(),
-        description: entry.ic_type,
+        amount: entry.expense,
+        date: new Date(entry.ex_date).toLocaleString(),
+        description: entry.ex_type,
       }));
 
       setHistory(formattedHistory);
@@ -138,7 +138,7 @@ export default function Incomes() {
                 className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
             >Back</button>
         </div>
-        <p className="text-lg text-gray-600">Total Income: ${incomesum}</p>
+        <p className="text-lg text-gray-600">Total Income: ${expensesum}</p>
       </div>
 
       <div className="mt-6 bg-gray-50 p-6 rounded-md shadow-md">

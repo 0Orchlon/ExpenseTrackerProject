@@ -659,7 +659,7 @@ def dt_all_income(request):
         myConn = connectDB() # database holbolt uusgej baina
         cursor = myConn.cursor() # cursor uusgej baina
         query = f"""
-        SELECT t_income.ic_type, t_income.income, t_income.ic_date, t_income.uid
+        SELECT t_income.ic_type, t_income.income, t_income.ic_date
         FROM t_income
         INNER JOIN t_user ON t_user.uid = t_income.uid
         WHERE t_user.uid = {uid}
@@ -671,7 +671,7 @@ def dt_all_income(request):
         columns = cursor.description
         respRow = [{columns[index][0]:column for index, 
             column in enumerate(value)} for value in cursor.fetchall()] # respRow is list and elements are dictionary. dictionary structure is columnName : value
-        uid = respRow[0]['uid']
+        # uid = respRow[0][]
         cursor.close()
         respdata = respRow
         resp = sendResponse(request, 200, respdata, action)
@@ -931,7 +931,7 @@ def dt_expense_sum(request):
         else: 
             sun = 0
         respdata = [{
-            "totalIncome": sun,
+            "totalExpense": sun,
         }]
         resp = sendResponse(request, 200, respdata, action)
 
