@@ -663,6 +663,7 @@ def dt_all_income(request):
         FROM t_income
         INNER JOIN t_user ON t_user.uid = t_income.uid
         WHERE t_user.uid = {uid}
+        ORDER BY t_income.ic_date DESC
                 """
         cursor.execute(query)
         myConn.commit()
@@ -778,6 +779,7 @@ def dt_all_expense(request):
         SELECT t.ex_type, t.expense, t.ex_date, t.uid
         FROM t_expense AS t
         WHERE t.uid = '{uid}'
+        ORDER BY t.ex_date DESC
         """
         cursor.execute(query)
         myConn.commit()
