@@ -86,7 +86,7 @@ export default function EditUser() {
   if (!user) {
     return (
       <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">
+        <h1 className="text-3xl font-bold text-center text-black-800 mb-4">
           Error
         </h1>
         <p className="text-lg text-red-600 text-center">User not found.</p>
@@ -104,36 +104,36 @@ export default function EditUser() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">
+      <h1 className="text-3xl font-bold text-center text-black mb-4">
         Edit User Info
       </h1>
 
       <div className="bg-gray-50 p-4 rounded-md shadow-md">
-        <h2 className="text-2xl font-semibold text-gray-700">
+        <h2 className="text-2xl font-semibold text-black">
           Edit your details
         </h2>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-black">
             First Name
           </label>
           <input
             type="text"
             value={newFname}
             onChange={(e) => setNewFname(e.target.value)}
-            className="mt-2 p-2 w-full border rounded-md"
+            className="mt-2 p-2 w-full border rounded-md text-black"
           />
         </div>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-black">
             Last Name
           </label>
           <input
             type="text"
             value={newLname}
             onChange={(e) => setNewLname(e.target.value)}
-            className="mt-2 p-2 w-full border rounded-md"
+            className="mt-2 p-2 w-full border rounded-md text-black"
           />
         </div>
 
@@ -145,7 +145,7 @@ export default function EditUser() {
           </p>
         )}
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex justify-center gap-5">
         <button onClick={toDashboard} 
                 className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
             >Back</button>

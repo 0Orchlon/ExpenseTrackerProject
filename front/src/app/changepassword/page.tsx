@@ -111,11 +111,11 @@ export default function ChangePassword() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Change Password</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-black">Change Password</h2>
 
         {/* Display user info if available */}
         {userInfo && (
-          <div className="mb-4 text-center">
+          <div className="mb-4 text-center text-black">
             <p>Welcome, {userInfo.fname} {userInfo.lname}!</p>
             <p>Your email: {userInfo.gmail}</p>
           </div>
@@ -125,7 +125,7 @@ export default function ChangePassword() {
           <div>
             <label
               htmlFor="oldPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Old Password
             </label>
@@ -143,7 +143,7 @@ export default function ChangePassword() {
           <div>
             <label
               htmlFor="newPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               New Password
             </label>
@@ -161,7 +161,7 @@ export default function ChangePassword() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Confirm New Password
             </label>
