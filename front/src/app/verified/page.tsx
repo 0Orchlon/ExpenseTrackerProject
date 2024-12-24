@@ -7,7 +7,7 @@ import { sendRequest } from "../../utils/api";
 interface Response {
   resultCode: number;
   resultMessage: string;
-  data: any[]; // Adjust this type as needed
+  data: { id?: string }[]; // Assuming `data` contains an `id` for the user
   size: number;
   action: string;
   curdate: string;
@@ -35,9 +35,12 @@ export default function Verified() {
 
         const response: Response = await sendRequest(surl, smethod);
 
-        if (response.resultCode === 3010 || response.resultCode === 3011) {
+        if (response.resultCode === 3010) {
           setSuccessMessage(response.resultMessage);
           setError(null);
+        } else if (response.resultCode === 3011) {
+          // Redirect to forgot/true with user's ID as token
+          router.push(`/forgot/true?token=${token}`);
         } else {
           setError(response.resultMessage);
           setSuccessMessage(null);
@@ -52,7 +55,7 @@ export default function Verified() {
     };
 
     verifyUser();
-  }, [token]);
+  }, [token, router]);
 
   if (loading) {
     return <p>Loading...</p>;
