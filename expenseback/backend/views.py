@@ -822,13 +822,16 @@ def totala(request):
         myConn = connectDB() # database holbolt uusgej baina
         cursor = myConn.cursor() # cursor uusgej baina
         query = f"""
-        SELECT (t.total_expense + i.total_income) AS total
-        FROM (SELECT uid, SUM(expense) AS total_expense FROM t_expense WHERE uid = {uid}
-        GROUP BY uid) AS t
-        JOIN (SELECT uid, SUM(income) AS total_income FROM t_income WHERE uid = {uid}
-        GROUP BY uid) AS i
+        SELECT COALESCE(t.total_expense, 0) + COALESCE(i.total_income, 0) AS total
+        FROM 
+            (SELECT 23 AS uid, SUM(expense) AS total_expense 
+             FROM t_expense 
+             WHERE uid = {uid} ) AS t
+        FULL OUTER JOIN 
+            (SELECT 23 AS uid, SUM(income) AS total_income 
+             FROM t_income 
+             WHERE uid = {uid} ) AS i
         ON t.uid = i.uid;
-
         """
         cursor.execute(query)
         myConn.commit()

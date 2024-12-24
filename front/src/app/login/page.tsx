@@ -76,7 +76,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
+      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-black">
         <h2 className="text-2xl font-bold text-center mb-6">
           Login to Your Account
         </h2>
@@ -84,7 +84,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Email
             </label>
@@ -101,7 +101,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Password
             </label>
@@ -129,14 +129,14 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-gray-500 text-center">
+        <p className="mt-4 text-sm text-black text-center">
           Don't have an account?{" "}
           <Link href="/register" className="text-indigo-500 hover:underline">
             Sign up
           </Link>
         </p>
 
-        <p className="mt-2 text-sm text-gray-500 text-center">
+        <p className="mt-2 text-sm text-black text-center">
           Forgot your password?{" "}
           <Link href="/forgot" className="text-indigo-500 hover:underline">
             Reset it here

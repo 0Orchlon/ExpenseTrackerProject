@@ -26,7 +26,7 @@ export default function EditUser() {
       router.push("/login");
       return;
     }
-
+  
     try {
       const parsedUser: Data = JSON.parse(userData);
       setUser(parsedUser);
@@ -40,13 +40,17 @@ export default function EditUser() {
       setLoading(false);
     }
   }, [router]);
-
+  const toDashboard = () => {
+    router.push("dashboard")
+  }
   const handleSaveChanges = async () => {
     if (newFname === user?.fname && newLname === user?.lname) {
       setSuccessMessage("");
       setError("No changes detected.");
       return;
     }
+
+
 
     try {
       const surl = "http://localhost:8000/useredit/";
@@ -142,6 +146,9 @@ export default function EditUser() {
         )}
 
         <div className="mt-6 flex justify-center">
+        <button onClick={toDashboard} 
+                className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
+            >Back</button>
           <button
             onClick={handleSaveChanges}
             className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"

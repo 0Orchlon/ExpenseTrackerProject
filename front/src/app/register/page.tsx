@@ -79,10 +79,10 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-black">Register</h2>
         <form onSubmit={handleRegister} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <div className="text-black">
+            <label htmlFor="email" className="block text-sm font-medium text-black">
               Email
             </label>
             <input
@@ -98,7 +98,7 @@ export default function Register() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-black">
               Password
             </label>
             <input
@@ -107,13 +107,13 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
               placeholder="Enter your password"
             />
           </div>
 
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="firstName" className="block text-sm font-medium text-black">
               First Name
             </label>
             <input
@@ -122,13 +122,13 @@ export default function Register() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
               placeholder="Enter your first name"
             />
           </div>
 
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="lastName" className="block text-sm font-medium text-black">
               Last Name
             </label>
             <input
@@ -137,7 +137,7 @@ export default function Register() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
               placeholder="Enter your last name"
             />
           </div>
