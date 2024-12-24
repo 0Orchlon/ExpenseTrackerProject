@@ -236,7 +236,7 @@ const toExpense = () => {
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-gray-800 mt-8">History</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mt-8 justify-center">History</h2>
         <div className="flex 2xl:w-6/12">
           <div className="text-green-500 justify-start px-10">
             <h3>Total Income</h3>

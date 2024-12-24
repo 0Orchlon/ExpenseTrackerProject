@@ -356,7 +356,7 @@ def dt_forgot(request):
             
             # forgot password verify hiih mail
             subject = "Nuuts ug shinechleh"
-            body = f"<a href='http://localhost:3000/verified/user?token={token}'>Martsan nuuts ugee shinechleh link</a>"
+            body = f"<a href='http://localhost:3000/verified/?token={token}'>Martsan nuuts ugee shinechleh link</a>"
             sendMail(gmail, subject, body)
             
             # sending Response

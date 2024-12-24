@@ -1,0 +1,382 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
+
+-- Started on 2024-12-24 10:37:53 +08
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 3474 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 224 (class 1259 OID 16477)
+-- Name: t_expense; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_expense (
+    exid bigint NOT NULL,
+    ex_type character varying(255),
+    ex_date timestamp(6) with time zone,
+    uid bigint,
+    expense integer
+);
+
+
+ALTER TABLE public.t_expense OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16476)
+-- Name: t_expense_exid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.t_expense ALTER COLUMN exid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.t_expense_exid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 222 (class 1259 OID 16457)
+-- Name: t_income; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_income (
+    icid bigint NOT NULL,
+    ic_type character varying(255),
+    income integer,
+    ic_date timestamp(6) with time zone,
+    uid bigint
+);
+
+
+ALTER TABLE public.t_income OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16456)
+-- Name: t_income_icid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.t_income ALTER COLUMN icid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.t_income_icid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 220 (class 1259 OID 16444)
+-- Name: t_token; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_token (
+    tid bigint NOT NULL,
+    token_type character varying(255),
+    token character varying(255),
+    create_date timestamp(6) with time zone,
+    end_date timestamp(6) with time zone,
+    uid bigint
+);
+
+
+ALTER TABLE public.t_token OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16443)
+-- Name: t_token_tid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.t_token ALTER COLUMN tid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.t_token_tid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 218 (class 1259 OID 16436)
+-- Name: t_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_user (
+    uid bigint NOT NULL,
+    gmail character varying(255),
+    username character varying(255),
+    lname character varying(255),
+    fname character varying(255),
+    password character varying(255),
+    create_date timestamp(6) with time zone,
+    last_login timestamp(6) with time zone,
+    is_verified boolean,
+    is_banned boolean
+);
+
+
+ALTER TABLE public.t_user OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16435)
+-- Name: t_user_uid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.t_user ALTER COLUMN uid ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.t_user_uid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3468 (class 0 OID 16477)
+-- Dependencies: 224
+-- Data for Name: t_expense; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_expense (exid, ex_type, ex_date, uid, expense) FROM stdin;
+1	food	2024-11-27 10:12:48.91917+08	1	-1000
+2	bull	2024-12-10 22:30:44.148353+08	2	-240
+10	coffee	2024-12-10 22:56:00.406086+08	1	-520
+18	coffee	2024-12-10 23:11:03.65519+08	1	-5200
+19	coffee	2024-12-10 23:14:17.319562+08	1	-5200
+20	dentist	2024-12-11 00:02:38.46799+08	1	-60000
+21	tre	2024-12-17 11:00:35.348997+08	1	-23434
+22	tre	2024-12-17 11:00:40.498776+08	1	-23434
+23	tre	2024-12-17 11:00:43.353135+08	1	-23434
+24	ge	2024-12-17 11:01:18.507149+08	1	-500000
+25	therapy	2024-12-19 16:39:42.558958+08	1	-9000
+\.
+
+
+--
+-- TOC entry 3466 (class 0 OID 16457)
+-- Dependencies: 222
+-- Data for Name: t_income; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_income (icid, ic_type, income, ic_date, uid) FROM stdin;
+1	Job	2000	2024-11-26 22:34:36.419513+08	1
+2	Job	5000	2024-12-10 19:57:26.140043+08	1
+3	Part-time	9012	2024-12-10 20:07:34.196031+08	2
+4	drugs	90122	2024-12-10 20:08:26.088708+08	2
+5	ge	500000	2024-12-17 11:01:13.784611+08	1
+6	ge	13422	2024-12-17 11:01:26.647508+08	1
+7	ge	121800	2024-12-17 11:01:35.585815+08	1
+8	sex shop	100	2024-12-19 16:11:39.84596+08	1
+9	togoo goos avsan mong	8990	2024-12-23 11:55:54.831397+08	1
+\.
+
+
+--
+-- TOC entry 3464 (class 0 OID 16444)
+-- Dependencies: 220
+-- Data for Name: t_token; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_token (tid, token_type, token, create_date, end_date, uid) FROM stdin;
+1	register	2h3jnxcf9qp4hdbb4iie	2024-11-27 11:04:12.395096+08	2024-11-28 11:04:12.395096+08	3
+2	register	txt71q5jz02jmf8mrmlx	2024-11-27 11:04:27.117648+08	2024-11-28 11:04:27.117648+08	4
+3	register	xgbqmxy9qyvqba7dmewdkifar9o4hz	2024-11-27 11:05:23.965071+08	1970-01-01 00:00:00+07	5
+4	register	zu51o6hp4g7g1pb0ngi9xn3zqk6r9w	2024-11-27 11:15:51.836931+08	1970-01-01 00:00:00+07	6
+5	register	g9sg2rvw51jqzsuiwb8wk7ymh33iqg	2024-11-27 11:36:08.092829+08	1970-01-01 00:00:00+07	7
+6	forgot	u4190iccmrlktrpefbyzhcf8wpyxu50bxdpvuwt6	2024-11-27 11:48:55.784304+08	1970-01-01 00:00:00+07	1
+7	forgot	a2648cdnthmvyk5ze77uvutrk	2024-11-27 11:52:42.670267+08	2024-11-28 11:52:42.670267+08	1
+8	register	sqrihitre5ku6r3myfd9	2024-12-04 01:39:10.873336+08	2024-12-05 01:39:10.873336+08	8
+9	register	5u2bocro5vkhd5xxvtf4	2024-12-04 01:48:01.519491+08	2024-12-05 01:48:01.519491+08	9
+10	register	evxp7h5t6c9jvl08kd1d	2024-12-04 01:55:57.759457+08	2024-12-05 01:55:57.759457+08	10
+11	register	llps6abz6xz0l8bcwcvs	2024-12-04 01:56:52.858731+08	2024-12-05 01:56:52.858731+08	11
+12	register	35a8s313pxgz4mk1s21f	2024-12-04 01:59:22.387825+08	2024-12-05 01:59:22.387825+08	12
+13	register	oym92xmav5hpcjaisudz37rsfeqfgh	2024-12-04 04:35:11.753958+08	1970-01-01 00:00:00+07	13
+14	register	qkkd4pn76gexr1yhacc9	2024-12-04 10:29:31.600267+08	2024-12-05 10:29:31.600267+08	14
+15	register	96ckm5of0xtf6ctnxnk8	2024-12-04 10:30:33.149986+08	2024-12-05 10:30:33.149986+08	15
+16	register	pp6abfa0cex7zo5m59x4	2024-12-04 10:46:25.290668+08	2024-12-05 10:46:25.290668+08	16
+17	register	t6jiv5awm32bbiplybut	2024-12-04 11:12:55.050133+08	2024-12-05 11:12:55.050133+08	17
+18	register	q6hd1y80yqaxjxsrqk1t	2024-12-04 11:16:54.807799+08	2024-12-05 11:16:54.807799+08	18
+19	register	bh6psxqw4wqjv5wkr3nz	2024-12-04 11:31:26.863295+08	2024-12-05 11:31:26.863295+08	19
+20	register	rdct7we2a4qs8xb0eelp	2024-12-04 11:52:55.160592+08	2024-12-05 11:52:55.160592+08	20
+21	register	lrhy1mrb7jib4lc0qahpquhayd3d52	2024-12-11 01:48:15.530217+08	1970-01-01 00:00:00+07	21
+22	forgot	sazwyeucfbn1xtij5cbnhljug	2024-12-11 02:04:20.456653+08	2024-12-12 02:04:20.456653+08	21
+\.
+
+
+--
+-- TOC entry 3462 (class 0 OID 16436)
+-- Dependencies: 218
+-- Data for Name: t_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_user (uid, gmail, username, lname, fname, password, create_date, last_login, is_verified, is_banned) FROM stdin;
+2	sw22d04@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:03:35.790864+08	1970-01-01 00:00:00+07	f	f
+3	sw22d04@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:04:12.363457+08	1970-01-01 00:00:00+07	f	f
+4	sw22d04999@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:04:27.086969+08	1970-01-01 00:00:00+07	f	f
+5	n@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:05:23.939283+08	1970-01-01 00:00:00+07	t	f
+6	ngd@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:15:51.791203+08	1970-01-01 00:00:00+07	t	f
+7	nwdgd@mandakh.edu.mn	\N	Jhf	Adu 	a9b7ba70783b617e9998dc4dd82eb3c5	2024-11-27 11:36:08.023569+08	1970-01-01 00:00:00+07	t	f
+21	sw22d045+asdw@mandakh.edu.mn	\N	Qwdsa	Adwasd	e10adc3949ba59abbe56e057f20f883e	2024-12-11 01:48:15.466703+08	2024-12-11 02:08:42.36237+08	t	f
+8	carflo160@gmail.com	\N	Doe	John	81dc9bdb52d04dc20036dbd8313ed055	2024-12-04 01:39:10.403586+08	1970-01-01 00:00:00+07	f	f
+9	bleakred@protonmail.com	\N	Doe	John	202cb962ac59075b964b07152d234b70	2024-12-04 01:48:01.482617+08	1970-01-01 00:00:00+07	f	f
+10	bleakred@protonmail.com	\N	Doe	John	81dc9bdb52d04dc20036dbd8313ed055	2024-12-04 01:55:57.716498+08	1970-01-01 00:00:00+07	f	f
+11	yfhfghr@protonmail.com	\N	Doe	John	202cb962ac59075b964b07152d234b70	2024-12-04 01:56:52.827686+08	1970-01-01 00:00:00+07	f	f
+12	yfhfghr@protonmail.com	\N	Doe	John	202cb962ac59075b964b07152d234b70	2024-12-04 01:59:22.363847+08	1970-01-01 00:00:00+07	f	f
+13	yfhfghr@protonmail.com	\N	Doezzz	Johnzzz	01cfcd4f6b8770febfb40cb906715822	2024-12-04 04:35:11.683945+08	1970-01-01 00:00:00+07	t	f
+1	sw22d045@mandakh.edu.mn	Orchlon	O.	Orchlon	81dc9bdb52d04dc20036dbd8313ed055	\N	2024-12-19 13:05:50.894365+08	t	f
+14	pro@mandakh.edu.mn	\N	Joo	Doe	81dc9bdb52d04dc20036dbd8313ed055	2024-12-04 10:29:31.427426+08	1970-01-01 00:00:00+07	f	f
+15	pro@mandakh.edu.mn	\N	Joo	Doe	81dc9bdb52d04dc20036dbd8313ed055	2024-12-04 10:30:33.108344+08	1970-01-01 00:00:00+07	f	f
+16	zaza@protonmail.com	\N	Zaza	Zaza	202cb962ac59075b964b07152d234b70	2024-12-04 10:46:25.247362+08	1970-01-01 00:00:00+07	f	f
+17	srgdfg@s.s	\N	Srgdfg	Efergd	9f6e6800cfae7749eb6c486619254b9c	2024-12-04 11:12:54.984772+08	1970-01-01 00:00:00+07	f	f
+18	srgdfg@s.s	\N	Srgdfg	Efergd	9f6e6800cfae7749eb6c486619254b9c	2024-12-04 11:16:54.781633+08	1970-01-01 00:00:00+07	f	f
+19	zzzz@zzz.z	\N	Srgdfg	John	202cb962ac59075b964b07152d234b70	2024-12-04 11:31:26.018207+08	1970-01-01 00:00:00+07	f	f
+20	iffert@protonmail.com	\N	Ert	Iff	827ccb0eea8a706c4c34a16891f84e7b	2024-12-04 11:52:55.098892+08	1970-01-01 00:00:00+07	f	f
+\.
+
+
+--
+-- TOC entry 3475 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: t_expense_exid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_expense_exid_seq', 25, true);
+
+
+--
+-- TOC entry 3476 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: t_income_icid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_income_icid_seq', 9, true);
+
+
+--
+-- TOC entry 3477 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: t_token_tid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_token_tid_seq', 22, true);
+
+
+--
+-- TOC entry 3478 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: t_user_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_user_uid_seq', 21, true);
+
+
+--
+-- TOC entry 3312 (class 2606 OID 16481)
+-- Name: t_expense t_expense_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_expense
+    ADD CONSTRAINT t_expense_pkey PRIMARY KEY (exid);
+
+
+--
+-- TOC entry 3310 (class 2606 OID 16461)
+-- Name: t_income t_income_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_income
+    ADD CONSTRAINT t_income_pkey PRIMARY KEY (icid);
+
+
+--
+-- TOC entry 3308 (class 2606 OID 16450)
+-- Name: t_token t_token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_token
+    ADD CONSTRAINT t_token_pkey PRIMARY KEY (tid);
+
+
+--
+-- TOC entry 3306 (class 2606 OID 16442)
+-- Name: t_user t_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_user
+    ADD CONSTRAINT t_user_pkey PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 3313 (class 2606 OID 16451)
+-- Name: t_token user id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_token
+    ADD CONSTRAINT "user id" FOREIGN KEY (uid) REFERENCES public.t_user(uid) NOT VALID;
+
+
+--
+-- TOC entry 3314 (class 2606 OID 16462)
+-- Name: t_income user id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_income
+    ADD CONSTRAINT "user id" FOREIGN KEY (uid) REFERENCES public.t_user(uid);
+
+
+--
+-- TOC entry 3315 (class 2606 OID 16482)
+-- Name: t_expense user id F key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_expense
+    ADD CONSTRAINT "user id F key" FOREIGN KEY (uid) REFERENCES public.t_user(uid);
+
+
+-- Completed on 2024-12-24 10:37:55 +08
+
+--
+-- PostgreSQL database dump complete
+--
+
